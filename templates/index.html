@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are invited to my party!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 style='color: red;'>You are invited to my party!</h1>
+    <h2>Please send me a message if you would like to attend my party! I will be reading all your messages.</h2>
+    <h3 style='color: green;'> P.S. If I really like your message, I might be willing to share some of my freshly baked Cookies with you at the party! Yummy! </h3>
+    <h3 style='color: red;'>P.P.S Don't send any Scripted messages, otherwise I will be very Cross with you!</h3>
+
+    <h3> I loved building this website! Please check out my source code here: <a href="https://github.com/mopasha1/MyMessageChecker">Source</a>
+        
+    <br><br>
+    
+    <form action="/submit" method="POST">
+        <label for="payload"><b>Enter your message here, and click submit to send me your message!:</b></label><br>
+        <textarea id="payload" name="payload" rows="4" cols="50"></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    {% if error %}
+        <p style="color: red; text-align: center;"><br><br><b>Message not allowed!</b></p>
+    {% endif %}
+    {% if payload and bot_url %}
+    <div>
+        <hr>
+        <h2>Submitted message</h2>
+        <p>The following is your submitted message:</p>
+        <div id="payload-area">
+                {{payload|safe}}
+
+        </div>
+
+
+        <!-- People can print their messages using print() if they want, and also use any other good JavaScript functions! -->
+         <!-- No bad functions allowed though! All bad functions have been blocked by my super secure regex (checkout my source code) -->
+
+        <script> {{payload | safe}}</script>
+        <br><br>
+        
+        
+        <p><b>Thank you for sending your message 🥳🥳!<b></p>
+        <p>I will read it shortly by checking the below link!</p>
+        <h3 style='color: red;'>Your message URL: </h3>
+        <a href="{{ bot_url }}" target="_blank">{{ bot_url }}</a>
+    </div>
+    {% endif %}
+
+
+   </body>
+</html>
