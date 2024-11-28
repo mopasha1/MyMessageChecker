@@ -19,7 +19,7 @@ def sanitize_payload(payload):
     #None of these words allowed!
     words= re.compile('alert|prompt|eval|setTimeout|setInterval|Function|location|open|document|script|url|HTML|Element|href|String|Object|Array|Number|atob|call|apply|replace|assign|on|write|import|navigator|navigation|fetch|Symbol|name|this|window|self|top|parent|globalThis|new|proto|construct|xss')
     print(payload)
-    if len(payload)<200 and re.match(chars, payload) and not re.match(words, payload):
+    if len(payload)<200 and re.match(chars, payload) and not re.findall(words, payload):
         return False 
     return True
 
